@@ -4,7 +4,8 @@ var ctx;
 var TARGET_WIDTH = 2000;
 var pixelSize;
 center = { x: 0, y: 0 };
-
+var apSize;
+var pad;
 const onLoad = () => {
   canvas = document.getElementById("canvas");
   console.log(window);
@@ -17,12 +18,16 @@ const onLoad = () => {
     return;
   }
   size = (width > height ? height : width) - 30;
+  apSize = size;
   canvas.width = size;
   canvas.height = size;
+  pad = size * 0.15; // size * 0.25;
+  size *= 0.7; // 0.5;
   pixelSize = size / TARGET_WIDTH;
   ctx = canvas.getContext("2d");
-  ctx.fillStyle = "#FFFEE9";
+  ctx.fillStyle = "#222";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
+  drawOval(1000, 1000, 1300, 1300, "#FFFEE9");
   kuda();
   plate();
   console.log(
@@ -45,14 +50,16 @@ const kuda = () => {
   drawLine(1170, 1565, 510, 995, "#6B310C", 37);
 };
 const s = (x) => x * pixelSize;
+const X = (x) => s(x) + pad;
+const Y = (y) => s(y) + pad;
 
 const drawOval = (x, y, radX, radY, color, rotation = null) => {
   ctx.fillStyle = color;
   ctx.beginPath();
   if (rotation) {
-    ctx.ellipse(s(x), s(y), s(radX), s(radY), rotation, 0, Math.PI * 2);
+    ctx.ellipse(X(x), Y(y), s(radX), s(radY), rotation, 0, Math.PI * 2);
   } else {
-    ctx.ellipse(s(x), s(y), s(radX), s(radY), 0, 0, Math.PI * 2);
+    ctx.ellipse(X(x), Y(y), s(radX), s(radY), 0, 0, Math.PI * 2);
   }
   ctx.fill();
 };
@@ -60,9 +67,9 @@ const drawHalfOval = (x, y, radX, radY, color, rotation = null) => {
   ctx.fillStyle = color;
   ctx.beginPath();
   if (rotation) {
-    ctx.ellipse(s(x), s(y), s(radX), s(radY), rotation, 0, Math.PI);
+    ctx.ellipse(X(x), Y(y), s(radX), s(radY), rotation, 0, Math.PI);
   } else {
-    ctx.ellipse(s(x), s(y), s(radX), s(radY), 0, 0, Math.PI);
+    ctx.ellipse(X(x), Y(y), s(radX), s(radY), 0, 0, Math.PI);
   }
   ctx.fill();
 };
@@ -78,8 +85,8 @@ const drawLine = (
   ctx.strokeStyle = strokeColor;
   ctx.lineWidth = s(lineWidth);
   ctx.beginPath();
-  ctx.moveTo(s(startX), s(startY));
-  ctx.lineTo(s(endX), s(endY));
+  ctx.moveTo(X(startX), Y(startY));
+  ctx.lineTo(X(endX), Y(endY));
   ctx.stroke();
 };
 
