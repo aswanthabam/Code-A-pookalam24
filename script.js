@@ -46,9 +46,44 @@ const plate = () => {
 
 const kuda = () => {
   drawHalfOval(645, 1100, 555, 555, "#FFC414", Math.PI / 1.32);
+  ctx.save();
+  ctx.beginPath();
+  ctx.ellipse(X(645), Y(1100), s(555), s(555), Math.PI / 1.32, 0, Math.PI);
+  ctx.clip();
+
+  ctx.strokeStyle = "#FDF94F";
+  ctx.lineWidth = 5;
+
+  ctx.beginPath();
+  ctx.ellipse(X(645), Y(1200), s(805), s(505), Math.PI / 1.38, 0, Math.PI);
+  ctx.stroke();
+
+  ctx.setLineDash([10, 5]);
+  ctx.beginPath();
+  ctx.ellipse(X(700), Y(1480), s(900), s(505), Math.PI / 1.51, 0, Math.PI);
+  ctx.stroke();
+  ctx.restore();
+
   drawOval(645, 1100, 555, 166, "#E96912", -Math.PI / 4);
+  ctx.save();
+  ctx.beginPath();
+  ctx.ellipse(X(645), Y(1100), s(555), s(166), -Math.PI / 4, 0, Math.PI * 2);
+  ctx.clip();
+  ctx.strokeStyle = "#FD940E";
+  ctx.lineWidth = 5;
+  ctx.beginPath();
+  ctx.ellipse(X(605), Y(1050), s(555), s(166), -Math.PI / 4, 0, Math.PI * 2);
+  ctx.stroke();
+
+  ctx.strokeStyle = "#FD940E";
+  ctx.lineWidth = 4;
+  ctx.beginPath();
+  ctx.ellipse(X(480), Y(990), s(555), s(166), -Math.PI / 4.2, 0, Math.PI * 2);
+  ctx.stroke();
+  ctx.restore();
   drawLine(1170, 1565, 510, 995, "#6B310C", 37);
 };
+
 const s = (x) => x * pixelSize;
 const X = (x) => s(x) + pad;
 const Y = (y) => s(y) + pad;
@@ -63,6 +98,7 @@ const drawOval = (x, y, radX, radY, color, rotation = null) => {
   }
   ctx.fill();
 };
+
 const drawHalfOval = (x, y, radX, radY, color, rotation = null) => {
   ctx.fillStyle = color;
   ctx.beginPath();
@@ -91,3 +127,4 @@ const drawLine = (
 };
 
 window.onload = onLoad;
+window.onresize = onLoad;
