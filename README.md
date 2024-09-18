@@ -1,16 +1,20 @@
-# Code A Pookalam (JS version)
+# Code A Pookalam (JavaScript Version)
 
-In this i've coded a pookalam in javascript. using html and canvas, i draw a design of pookalam, from scratch without using any external libraries.
-Check it out here : https://git.aswanthvc.me/code-a-pookalam2
+This project showcases a Pookalam design created using JavaScript, HTML, and canvas. The design is implemented from scratch without relying on external libraries.
 
-### Running locally
-For running this open index.html file in a browser.
-I reccomand runing the code using the below steps:
-1. Clone the repo
-2. Install npm and npx
-3. Run the command in the folder containing index.html
-4. visit http://localhost:3000
+Check out the project [here](https://aswanthabam.github.io/code-a-pookalam2/).
+## Running Locally
 
-```bash
-npx serve -S ./
-```
+To run the project locally, follow these steps:
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/aswanthabam/code-a-pookalam2
+   ```
+2. Ensure you have `npm` and `npx` installed on your system.
+3. Navigate to the directory containing `index.html`.
+4. Start a local server using `npx`:
+   ```bash
+   npx serve -S ./
+   ```
+5. Open your browser and visit [http://localhost:3000](http://localhost:3000) to view the Pookalam design.
