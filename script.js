@@ -6,8 +6,25 @@ var pixelSize;
 center = { x: 0, y: 0 };
 var apSize;
 var pad;
-
-const onLoad = () => {
+const showToast = (message) => {
+  return;
+  var x = document.getElementById("info");
+  x.innerHTML = message;
+  x.className = "show";
+  setTimeout(function () {
+    x.className = x.className.replace("show", "");
+  }, 3000);
+};
+const downloadCanvasImage = () => {
+  const image = canvas.toDataURL("image/png");
+  const link = document.createElement("a");
+  link.href = image;
+  link.download = "pookalam_aswanth_vc_2024.png";
+  link.click();
+};
+const onLoad = async () => {
+  showToast("Poovidunu... Kaathiriku! 🌼🌼🌼");
+  // await new Promise((resolve) => setTimeout(resolve, 1500));
   var font = document.createElement("link");
   font.href =
     "https://fonts.googleapis.com/css2?family=Handjet:wght@100..900&display=swap";
@@ -64,6 +81,16 @@ const draw = () => {
   poovu(1100, 1720, 1.5);
   poovu(1400, 1720, 1.5);
   poovu(1250, 1790, 2);
+  showToast("Poovitu, onashamsakal! 🌼🌼🌼");
+  ctx.font = `${70 * pixelSize}px 'Handjet'`; // Set the font size and family
+  ctx.fillStyle = "#000"; // Set the fill color
+  ctx.textAlign = "center"; // Align text to the center
+  ctx.textBaseline = "middle"; // Align the text vertically in the middle
+  size = apSize;
+  pad = 0;
+  pixelSize = size / TARGET_WIDTH;
+  // Draw filled text
+  ctx.fillText("© aswanthvc.me", X(170), Y(1940));
 };
 
 const poovu = (x, y, scale) => {

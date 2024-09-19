@@ -13,12 +13,71 @@
         height: 100vh;
         background-color: #f0f0f0;
       }
+      #info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #fff;
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        /* transform: translateX(-50%); */
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      #info.show {
+        opacity: 1;
+      }
+      button {
+        background-color: #fff;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        margin: 5px;
+        cursor: pointer;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      button:hover {
+        background-color: #f0f0f0;
+      }
+      #buttons {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <script src="script.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
   </head>
   <body>
+    <noscript>
+      <h1>Javascript illaathe enik poovidaan swakaryam illa ... :(</h1>
+    </noscript>
+    <div id="info">Loading...</div>
+    <div id="buttons">
+      <button onclick="downloadCanvasImage()" id="download">
+        <i class="bi bi-download"></i>
+      </button>
+      <button
+        onclick="(()=>{const link = document.createElement('a');link.href = 'https://aswanthvc.me';link.download = 'pookalam_aswanth_vc_2024.png';link.target='_blank';link.click();})()"
+        id="stop"
+      >
+        <i class="bi bi-person"></i>
+      </button>
+    </div>
     <canvas id="canvas"></canvas>
   </body>
 </html>
