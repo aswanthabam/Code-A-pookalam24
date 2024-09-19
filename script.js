@@ -27,14 +27,62 @@ const onLoad = () => {
   ctx = canvas.getContext("2d");
   ctx.fillStyle = "#fff";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
+  drawOval(1000, 1000, 1330, 1330, "#7E1E2F");
   drawOval(1000, 1000, 1300, 1300, "#FFFEE9");
+  ctx.save();
+  ctx.beginPath();
+  ctx.ellipse(X(1000), Y(1000), s(1300), s(1300), 0, 0, Math.PI * 2);
+  ctx.clip();
+
   kuda();
   plate();
   thenga(650, 1615, 1, 1);
   thenga(870, 1615, -1);
+  villaku();
+  happyOnam();
+  ctx.restore();
   console.log(
     "Canvas loaded. Width: " + canvas.width + " Height: " + canvas.height
   );
+};
+
+const happyOnam = () => {
+  drawHalfOval(1000, 0, 1000, 400, "#DBFAFA", Math.PI, Math.PI * 2);
+  var size1 = 150 * pixelSize;
+  var size2 = 280 * pixelSize;
+  offset = 190 * pixelSize;
+  ctx.font = `${size1}px 'Handjet'`; // Set the font size and family
+  ctx.fillStyle = "#7A2030"; // Set the fill color
+  ctx.textAlign = "center"; // Align text to the center
+  ctx.textBaseline = "middle"; // Align the text vertically in the middle
+
+  // Draw filled text
+  ctx.fillText("HAPPY", canvas.width / 2, canvas.height / 8);
+
+  ctx.font = `${size2}px 'Handjet'`; // Set the font size and family
+  ctx.fillStyle = "#E36B12"; // Set the fill color
+  ctx.textAlign = "center"; // Align text to the center
+  ctx.textBaseline = "middle"; // Align the text vertically in the middle
+
+  // Draw filled text
+  ctx.fillText("ONAM", canvas.width / 2, canvas.height / 8 + offset);
+};
+
+const villaku = () => {
+  drawLine(1250, 1656, 1250, 1100, "#FFC414", 80);
+  drawHalfOval(1250, 1256, 70, 30, "#FC9606", Math.PI, Math.PI * 1);
+  drawHalfOval(1250, 1256, 70, 30, "#E5880F", Math.PI * 2, Math.PI * 1);
+  drawLine(1250, 1656, 1250, 1280, "#FFC414", 80);
+  drawLine(1250, 1232, 1250, 1100, "#FFC414", 80);
+
+  drawHalfOval(1250, 960, 40, 250, "#E9E276", Math.PI, Math.PI);
+
+  drawLine(1250, 1100, 1250, 1063, "#FD9506", 90);
+  drawHalfOval(1250, 870, 200, 200, "#FFC414", Math.PI * 2.1, Math.PI * 0.8);
+  drawLine(1050, 910, 1450, 910, "#FC9606", 50);
+
+  drawHalfOval(1250, 1750, 200, 200, "#FFaf01", Math.PI * 1.1, Math.PI * 0.8);
+  drawLine(1050, 1710, 1450, 1710, "#FC9606", 50);
 };
 
 const thenga = (x, y, rotation = 1, scale = 1) => {
@@ -154,13 +202,21 @@ const drawOval = (x, y, radX, radY, color, rotation = null) => {
   ctx.fill();
 };
 
-const drawHalfOval = (x, y, radX, radY, color, rotation = null) => {
+const drawHalfOval = (
+  x,
+  y,
+  radX,
+  radY,
+  color,
+  rotation = null,
+  angle = Math.PI
+) => {
   ctx.fillStyle = color;
   ctx.beginPath();
   if (rotation) {
-    ctx.ellipse(X(x), Y(y), s(radX), s(radY), rotation, 0, Math.PI);
+    ctx.ellipse(X(x), Y(y), s(radX), s(radY), rotation, 0, angle);
   } else {
-    ctx.ellipse(X(x), Y(y), s(radX), s(radY), 0, 0, Math.PI);
+    ctx.ellipse(X(x), Y(y), s(radX), s(radY), 0, 0, angle);
   }
   ctx.fill();
 };
