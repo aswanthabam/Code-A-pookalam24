@@ -6,8 +6,28 @@ var pixelSize;
 center = { x: 0, y: 0 };
 var apSize;
 var pad;
+
 const onLoad = () => {
+  var font = document.createElement("link");
+  font.href =
+    "https://fonts.googleapis.com/css2?family=Handjet:wght@100..900&display=swap";
+  font.rel = "stylesheet";
+  document.head.appendChild(font);
+  font.onload = () => {
+    document.fonts
+      .load("100 1em Handjet")
+      .then(draw)
+      .catch((error) => {
+        console.error("Font loading failed:", error);
+      });
+  };
+};
+
+const draw = () => {
   canvas = document.getElementById("canvas");
+  console.log(
+    "Canvas loaded. Width: " + canvas.width + " Height: " + canvas.height
+  );
   console.log(window);
   width = window.innerWidth;
   height = window.innerHeight;
@@ -44,9 +64,6 @@ const onLoad = () => {
   poovu(1100, 1720, 1.5);
   poovu(1400, 1720, 1.5);
   poovu(1250, 1790, 2);
-  console.log(
-    "Canvas loaded. Width: " + canvas.width + " Height: " + canvas.height
-  );
 };
 
 const poovu = (x, y, scale) => {
