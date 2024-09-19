@@ -25,14 +25,69 @@ const onLoad = () => {
   size *= 0.7; // 0.5;
   pixelSize = size / TARGET_WIDTH;
   ctx = canvas.getContext("2d");
-  ctx.fillStyle = "#222";
+  ctx.fillStyle = "#fff";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   drawOval(1000, 1000, 1300, 1300, "#FFFEE9");
   kuda();
   plate();
+  thenga(650, 1615, 1, 1);
+  thenga(870, 1615, -1);
   console.log(
     "Canvas loaded. Width: " + canvas.width + " Height: " + canvas.height
   );
+};
+
+const thenga = (x, y, rotation = 1, scale = 1) => {
+  drawHalfOval(
+    x,
+    y,
+    140 * scale,
+    170 * scale,
+    "#6B2E01",
+    (Math.PI / -0.6) * rotation
+  );
+  drawOval(
+    x,
+    y,
+    140 * scale,
+    80 * scale,
+    "#6B2E01",
+    (Math.PI / -1.5) * rotation
+  );
+  drawOval(x, y, 130 * scale, 70 * scale, "#fff", (Math.PI / -1.5) * rotation);
+  drawOval(
+    x,
+    y,
+    120 * scale,
+    60 * scale,
+    "#E8E2CC",
+    (Math.PI / -1.5) * rotation
+  );
+  ctx.save();
+  ctx.beginPath();
+  ctx.ellipse(
+    X(x),
+    Y(y),
+    s(120 * scale),
+    s(60 * scale),
+    (Math.PI / -1.5) * rotation,
+    0,
+    Math.PI * 2 * rotation
+  );
+  ctx.clip();
+  ctx.beginPath();
+  ctx.ellipse(
+    X(x),
+    Y(y + 70 * scale),
+    s(120 * scale),
+    s(60 * scale),
+    (Math.PI / -1.5) * rotation,
+    0,
+    Math.PI * 2 * rotation
+  );
+  ctx.fillStyle = "#EFF0E8";
+  ctx.fill();
+  ctx.restore();
 };
 
 const plate = () => {
