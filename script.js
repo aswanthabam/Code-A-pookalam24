@@ -41,9 +41,50 @@ const onLoad = () => {
   villaku();
   happyOnam();
   ctx.restore();
+  poovu(1100, 1720, 1.5);
+  poovu(1400, 1720, 1.5);
+  poovu(1250, 1790, 2);
   console.log(
     "Canvas loaded. Width: " + canvas.width + " Height: " + canvas.height
   );
+};
+
+const poovu = (x, y, scale) => {
+  drawFlower(x, y, scale * 1.2, "#E68A00", 14);
+  drawFlower(x, y, scale, "#FEA22D", 14);
+  drawFlower(x, y, scale * 0.7, "#FCD60F", 13);
+  drawFlower(x, y, scale * 0.5, "#FFFE5B", 13, "#7F1E2F");
+};
+const drawFlower = (
+  x,
+  y,
+  scale,
+  petalColor = "red",
+  numPetals = 14,
+  centerColor = "yellow"
+) => {
+  const petalRadiusX = 20 * scale;
+  const petalRadiusY = 40 * scale;
+  const centerRadius = 15 * scale;
+  const angleIncrement = (Math.PI * 2) / numPetals;
+
+  // Draw petals around the center
+  for (let i = 0; i < numPetals; i++) {
+    const angle = i * angleIncrement;
+    const petalX = x + Math.cos(angle) * (centerRadius + petalRadiusX / 2);
+    const petalY = y + Math.sin(angle) * (centerRadius + petalRadiusY / 2);
+    drawOval(
+      petalX,
+      petalY,
+      petalRadiusX * 2,
+      petalRadiusY / 4,
+      petalColor,
+      angle
+    );
+  }
+
+  // Draw center of the flower
+  drawOval(x, y, centerRadius, centerRadius, centerColor);
 };
 
 const happyOnam = () => {
