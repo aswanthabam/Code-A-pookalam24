@@ -155,8 +155,10 @@ const draw = () => {
   villaku();
   happyOnam();
   ctx.restore();
-  poovu(1100, 1720, 2);
+  drawLeaf(1500, 1650, 0.4);
   poovu(1400, 1720, 1.5);
+  // drawLeaf(1250, 1650, 0.6);
+  poovu(1100, 1720, 2);
   // poovu(1250, 1790, 2);
   showToast("Poovitu, onashamsakal! 🌼🌼🌼");
   ctx.font = `${70 * pixelSize}px 'Handjet'`; // Set the font size and family
@@ -168,6 +170,12 @@ const draw = () => {
   pixelSize = size / TARGET_WIDTH;
   // Draw filled text
   ctx.fillText("© aswanthvc.me", X(170), Y(1940));
+
+  // Draw a smaller leaf at (300, 300) with a scaling factor of 0.5
+  // drawLeaf(ctx, 300, 300, 0.5);
+
+  // // Draw a larger leaf at (450, 150) with a scaling factor of 2
+  // drawLeaf(ctx, 450, 150, 2);
 };
 
 const poovu = (x, y, scale) => {
@@ -229,6 +237,19 @@ const happyOnam = () => {
   // Draw filled text
   ctx.fillText("ONAM", size, size / 2.1 + offset);
 };
+function drawLeaf(x, y, scale = 1) {
+  var w = 100 * scale;
+  var h = 200 * scale;
+  drawOval(x, y, w, h, "green", Math.PI / 3);
+  drawLine(
+    x - w * 1.5,
+    y + h / 2,
+    x + w * 1.5,
+    y - h * 0.4,
+    "yellow",
+    5 * scale
+  );
+}
 
 const villaku = () => {
   // draw stand and base
