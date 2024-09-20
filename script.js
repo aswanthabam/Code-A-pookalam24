@@ -50,8 +50,8 @@ function drawCircleWithDots(
   color2
 ) {
   const angleIncrement = (2 * Math.PI) / numDots;
-  rotationAngle = Math.PI / 0;
-  rotationInterval = Math.PI / numDots;
+  // rotationAngle = Math.PI / 0;
+  // rotationInterval = (360 / numDots) * ();
   for (let i = 0; i < numDots; i++) {
     const angle = i * angleIncrement;
     const x = centerX + radius * Math.cos(angle);
@@ -59,17 +59,16 @@ function drawCircleWithDots(
     // Alternate between color1 and color2
     ctx.fillStyle = i % 2 === 0 ? color1 : color2;
     ctx.strokeStyle = i % 2 === 0 ? color1 : color2;
-    ctx.lineWidth = dotRadius * 0.33;
-
-    // Draw the dot
-    rotationAngle += rotationInterval;
-    // ctx.save();
-
-    // Move the canvas origin to the center of the arc
-    // ctx.translate(x, y);
+    ctx.lineWidth = dotRadius * 0.17;
     ctx.beginPath();
-    ctx.rotate(rotationAngle);
-    ctx.arc(x, y, dotRadius, 0, 1 * Math.PI, false);
+    ctx.arc(
+      x,
+      y,
+      dotRadius,
+      i * angleIncrement,
+      Math.PI + i * angleIncrement,
+      false
+    );
     ctx.stroke();
     // ctx.restore();
     // if (i >= numDots - 10) {
