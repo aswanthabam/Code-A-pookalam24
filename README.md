@@ -18,3 +18,6 @@ To run the project locally, follow these steps:
    npx serve -S ./
    ```
 5. Open your browser and visit [http://localhost:3000](http://localhost:3000) to view the Pookalam design.
+
+# Demo 
+![Preview image](https://github.com/aswanthabam/Code-A-pookalam24/blob/main/Aswanth%20V%20C_2024_MuLearn.png?raw=true)
