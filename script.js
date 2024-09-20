@@ -247,10 +247,14 @@ const villaku = () => {
   drawLine(1050, 1250, 1450, 940, "#FFC414", 100);
   ctx.restore();
   drawLine(1050, 940, 1450, 940, "#FC9606", 50);
-
   // draw circle on top of the villaku
   drawOval(1250, 920, 15, 200, "#FFC414", Math.PI / 2);
   drawOval(1250, 920, 5, 170, "#E38911", Math.PI / 2);
+  // thiri
+  drawOval(1160, 900, 10, 30, "#FDD516", Math.PI);
+  drawOval(1260, 900, 10, 30, "#FDD516", Math.PI);
+  drawOval(1360, 900, 10, 30, "#FDD516", Math.PI);
+  drawOval(1440, 900, 10, 30, "#FDD516", Math.PI);
   // draw the center kuthu vilakku
   ctx.save();
   ctx.beginPath();
