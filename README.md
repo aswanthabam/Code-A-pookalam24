@@ -2,7 +2,7 @@
 
 This project showcases a Pookalam design created using JavaScript, HTML, and canvas. The design is implemented from scratch without relying on external libraries.
 
-Check out the project [here](https://github.com/aswanthabam/Code-A-pookalam24/).
+Check out the project [here](https://aswanthabam.github.io/Code-A-pookalam24/).
 ## Running Locally
 
 To run the project locally, follow these steps:
