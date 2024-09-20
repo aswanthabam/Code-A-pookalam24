@@ -9,7 +9,7 @@ To run the project locally, follow these steps:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/aswanthabam/code-a-pookalam2
+   git clone https://aswanthabam.github.io/Code-A-pookalam24/
    ```
 2. Ensure you have `npm` and `npx` installed on your system.
 3. Navigate to the directory containing `index.html`.
