@@ -7,7 +7,7 @@ center = { x: 0, y: 0 };
 var apSize;
 var pad;
 const showToast = (message) => {
-  return;
+  // return;
   var x = document.getElementById("info");
   x.innerHTML = message;
   x.className = "show";
@@ -40,6 +40,46 @@ const onLoad = async () => {
   };
 };
 
+function drawCircleWithDots(
+  centerX,
+  centerY,
+  radius,
+  numDots,
+  dotRadius,
+  color1,
+  color2
+) {
+  const angleIncrement = (2 * Math.PI) / numDots;
+  rotationAngle = Math.PI / 0;
+  rotationInterval = Math.PI / numDots;
+  for (let i = 0; i < numDots; i++) {
+    const angle = i * angleIncrement;
+    const x = centerX + radius * Math.cos(angle);
+    const y = centerY + radius * Math.sin(angle);
+    // Alternate between color1 and color2
+    ctx.fillStyle = i % 2 === 0 ? color1 : color2;
+    ctx.strokeStyle = i % 2 === 0 ? color1 : color2;
+    ctx.lineWidth = dotRadius * 0.33;
+
+    // Draw the dot
+    rotationAngle += rotationInterval;
+    // ctx.save();
+
+    // Move the canvas origin to the center of the arc
+    // ctx.translate(x, y);
+    ctx.beginPath();
+    ctx.rotate(rotationAngle);
+    ctx.arc(x, y, dotRadius, 0, 1 * Math.PI, false);
+    ctx.stroke();
+    // ctx.restore();
+    // if (i >= numDots - 10) {
+    // } else {
+    //   ctx.arc(x, y, dotRadius, 0, 2 * Math.PI);
+    //   ctx.fill();
+    // }
+  }
+}
+
 const draw = () => {
   canvas = document.getElementById("canvas");
   console.log(
@@ -58,14 +98,52 @@ const draw = () => {
   apSize = size;
   canvas.width = size;
   canvas.height = size;
-  pad = size * 0.15; // size * 0.25;
-  size *= 0.7; // 0.5;
-  pixelSize = size / TARGET_WIDTH;
   ctx = canvas.getContext("2d");
+  pad = 0.15;
+  size *= 0.7;
+  pixelSize = size / TARGET_WIDTH;
+
   ctx.fillStyle = "#fff";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  pad = apSize * 0.25; // size * 0.25;
+  size = apSize * 0.5; // 0.5;
+  pixelSize = size / TARGET_WIDTH;
+
+  drawOval(1000, 1000, 1750, 1750, "#7E1E2F");
+  ctx.save();
+  ctx.beginPath();
+  ctx.ellipse(X(1000), Y(1000), s(1750), s(1750), 0, 0, Math.PI * 2);
+  ctx.clip();
+  colors = ["#FFFEE9", "grey", "red", "green", "pink", "blue"];
+  ci = 0;
+  drawCircleWithDots(
+    X(1000),
+    Y(1000),
+    s(1330),
+    100,
+    s(500),
+    colors[ci],
+    colors[ci + 1]
+  );
+  ctx.restore();
+  // return;
+  // drawOval(2250, 1000, 500, 500, "red");
+
   drawOval(1000, 1000, 1330, 1330, "#7E1E2F");
   drawOval(1000, 1000, 1300, 1300, "#FFFEE9");
+  drawOval(1000, 1000, 1200, 1200, "#FFF");
+  drawOval(1000, 1000, 1100, 1100, "#FFFEE9");
+  drawOval(1000, 1000, 1000, 1000, "#FFF");
+  drawOval(1000, 1000, 900, 900, "#FFFEE9");
+  drawOval(1000, 1000, 800, 800, "#FFF");
+  drawOval(1000, 1000, 700, 700, "#FFFEE9");
+  drawOval(1000, 1000, 600, 600, "#FFF");
+  drawOval(1000, 1000, 500, 500, "#FFFEE9");
+  drawOval(1000, 1000, 400, 400, "#FFF");
+  drawOval(1000, 1000, 300, 300, "#FFFEE9");
+  drawOval(1000, 1000, 200, 200, "#FFF");
+  drawOval(1000, 1000, 100, 100, "#FFFEE9");
   ctx.save();
   ctx.beginPath();
   ctx.ellipse(X(1000), Y(1000), s(1300), s(1300), 0, 0, Math.PI * 2);
@@ -78,9 +156,9 @@ const draw = () => {
   villaku();
   happyOnam();
   ctx.restore();
-  poovu(1100, 1720, 1.5);
+  poovu(1100, 1720, 2);
   poovu(1400, 1720, 1.5);
-  poovu(1250, 1790, 2);
+  // poovu(1250, 1790, 2);
   showToast("Poovitu, onashamsakal! 🌼🌼🌼");
   ctx.font = `${70 * pixelSize}px 'Handjet'`; // Set the font size and family
   ctx.fillStyle = "#000"; // Set the fill color
@@ -142,7 +220,7 @@ const happyOnam = () => {
   ctx.textBaseline = "middle"; // Align the text vertically in the middle
 
   // Draw filled text
-  ctx.fillText("HAPPY", canvas.width / 2, canvas.height / 8);
+  ctx.fillText("HAPPY", size, size / 2.14);
 
   ctx.font = `${size2}px 'Handjet'`; // Set the font size and family
   ctx.fillStyle = "#E36B12"; // Set the fill color
@@ -150,22 +228,38 @@ const happyOnam = () => {
   ctx.textBaseline = "middle"; // Align the text vertically in the middle
 
   // Draw filled text
-  ctx.fillText("ONAM", canvas.width / 2, canvas.height / 8 + offset);
+  ctx.fillText("ONAM", size, size / 2.1 + offset);
 };
 
 const villaku = () => {
-  drawLine(1250, 1656, 1250, 1100, "#FFC414", 80);
+  // draw stand and base
   drawHalfOval(1250, 1256, 70, 30, "#FC9606", Math.PI, Math.PI * 1);
   drawHalfOval(1250, 1256, 70, 30, "#E5880F", Math.PI * 2, Math.PI * 1);
-  drawLine(1250, 1656, 1250, 1280, "#FFC414", 80);
-  drawLine(1250, 1232, 1250, 1100, "#FFC414", 80);
-
-  drawHalfOval(1250, 960, 40, 250, "#E9E276", Math.PI, Math.PI);
-
+  drawLine(1250, 1656, 1250, 1280, "#FDD615", 80);
+  drawLine(1250, 1232, 1250, 1100, "#FDD615", 80);
+  drawLine(1270, 1656, 1270, 1280, "#FFC414", 40);
+  drawLine(1270, 1232, 1270, 1100, "#FFC414", 40);
+  // draw villaku top
   drawLine(1250, 1100, 1250, 1063, "#FD9506", 90);
-  drawHalfOval(1250, 870, 200, 200, "#FFC414", Math.PI * 2.1, Math.PI * 0.8);
-  drawLine(1050, 910, 1450, 910, "#FC9606", 50);
+  drawHalfOval(1250, 940, 200, 130, "#FDD516", Math.PI * 2, Math.PI);
+  ctx.save();
+  ctx.ellipse(X(1250), Y(940), s(200), s(130), Math.PI * 2, 0, Math.PI);
+  ctx.clip();
+  drawLine(1050, 1250, 1450, 940, "#FFC414", 100);
+  ctx.restore();
+  drawLine(1050, 940, 1450, 940, "#FC9606", 50);
 
+  // draw circle on top of the villaku
+  drawOval(1250, 920, 15, 200, "#FFC414", Math.PI / 2);
+  drawOval(1250, 920, 5, 170, "#E38911", Math.PI / 2);
+  // draw the center kuthu vilakku
+  ctx.save();
+  ctx.beginPath();
+  ctx.ellipse(X(1250), Y(760), s(170), s(170), Math.PI / 2, 0, Math.PI * 2);
+  ctx.clip();
+  drawHalfOval(1250, 950, 25, 200, "#E9E276", Math.PI, Math.PI);
+  ctx.restore();
+  // draw the bottom kuthu vilakku
   drawHalfOval(1250, 1750, 200, 200, "#FFaf01", Math.PI * 1.1, Math.PI * 0.8);
   drawLine(1050, 1710, 1450, 1710, "#FC9606", 50);
 };
@@ -224,52 +318,52 @@ const thenga = (x, y, rotation = 1, scale = 1) => {
 };
 
 const plate = () => {
-  drawOval(1000, 1750, 600, 112, "#D96E06"); // 15
-  drawOval(1000, 1680, 695, 157, "#ffb200");
-  drawOval(1000, 1680, 675, 137, "#FCE72C"); // 20
-  drawOval(1000, 1680, 665, 127, "#ffb200"); // 10
-  drawOval(1000, 1680, 650, 112, "#D96E06"); // 15
-  drawOval(1000, 1680, 640, 102, "#F4C221"); // 10
+  drawOval(1100, 1750, 600, 112, "#D96E06"); // 15
+  drawOval(1100, 1680, 695, 157, "#ffb200");
+  drawOval(1100, 1680, 675, 137, "#FCE72C"); // 20
+  drawOval(1100, 1680, 665, 127, "#ffb200"); // 10
+  drawOval(1100, 1680, 650, 112, "#D96E06"); // 15
+  drawOval(1100, 1680, 640, 102, "#F4C221"); // 10
 };
 
 const kuda = () => {
-  drawHalfOval(645, 1100, 555, 555, "#FFC414", Math.PI / 1.32);
+  drawHalfOval(745, 1100, 555, 555, "#FFC414", Math.PI / 1.32);
   ctx.save();
   ctx.beginPath();
-  ctx.ellipse(X(645), Y(1100), s(555), s(555), Math.PI / 1.32, 0, Math.PI);
+  ctx.ellipse(X(745), Y(1100), s(555), s(555), Math.PI / 1.32, 0, Math.PI);
   ctx.clip();
 
   ctx.strokeStyle = "#FDF94F";
   ctx.lineWidth = 5;
 
   ctx.beginPath();
-  ctx.ellipse(X(645), Y(1200), s(805), s(505), Math.PI / 1.38, 0, Math.PI);
+  ctx.ellipse(X(745), Y(1200), s(805), s(505), Math.PI / 1.38, 0, Math.PI);
   ctx.stroke();
 
   ctx.setLineDash([10, 5]);
   ctx.beginPath();
-  ctx.ellipse(X(700), Y(1480), s(900), s(505), Math.PI / 1.51, 0, Math.PI);
+  ctx.ellipse(X(800), Y(1480), s(900), s(505), Math.PI / 1.51, 0, Math.PI);
   ctx.stroke();
   ctx.restore();
 
-  drawOval(645, 1100, 555, 166, "#E96912", -Math.PI / 4);
+  drawOval(745, 1100, 555, 166, "#E96912", -Math.PI / 4);
   ctx.save();
   ctx.beginPath();
-  ctx.ellipse(X(645), Y(1100), s(555), s(166), -Math.PI / 4, 0, Math.PI * 2);
+  ctx.ellipse(X(745), Y(1100), s(555), s(166), -Math.PI / 4, 0, Math.PI * 2);
   ctx.clip();
   ctx.strokeStyle = "#FD940E";
   ctx.lineWidth = 5;
   ctx.beginPath();
-  ctx.ellipse(X(605), Y(1050), s(555), s(166), -Math.PI / 4, 0, Math.PI * 2);
+  ctx.ellipse(X(705), Y(1050), s(555), s(166), -Math.PI / 4, 0, Math.PI * 2);
   ctx.stroke();
 
   ctx.strokeStyle = "#FD940E";
   ctx.lineWidth = 4;
   ctx.beginPath();
-  ctx.ellipse(X(480), Y(990), s(555), s(166), -Math.PI / 4.2, 0, Math.PI * 2);
+  ctx.ellipse(X(580), Y(990), s(555), s(166), -Math.PI / 4.2, 0, Math.PI * 2);
   ctx.stroke();
   ctx.restore();
-  drawLine(1170, 1565, 510, 995, "#6B310C", 37);
+  drawLine(1270, 1565, 620, 995, "#6B310C", 37);
 };
 
 const s = (x) => x * pixelSize;
